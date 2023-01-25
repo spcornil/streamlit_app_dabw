@@ -13,4 +13,4 @@ sl.header('🍌🥭 Build your Own Fruit Smoothie 🥝🍇')
 fruit_csv = "https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt"
 my_fruit_list = pd.read_csv(fruit_csv)
 
-sl.dataframe*(my_fruit_list)
+sl.dataframe(my_fruit_list)
