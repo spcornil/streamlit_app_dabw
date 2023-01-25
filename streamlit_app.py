@@ -13,7 +13,7 @@ sl.header('🍌🥭 Build your Own Fruit Smoothie 🥝🍇')
 fruit_csv = 'https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt'
 
 my_fruit_list = pd.read_csv(fruit_csv)
-my_fruit_list.set_index.('Fruit')
+my_fruit_list.set_index('Fruit')
 
 sl.multiselect('Pick some fruits:', list(my_fruit_list.index))
 
