@@ -2,6 +2,8 @@ import streamlit as sl
 import pandas as pd
 
 sl.title('My Mom\'s New Healthy Diner')
+sl.subheader('Mon-Sat 7am - 9pm')
+sl.subheader('Sun 9am - 2:30pm')
 
 sl.header('Breakfast Favorites')
 sl.text('🥣 Omega 3 & Blueberry Oatmeal')
@@ -9,6 +11,7 @@ sl.text('🥗 Kale, Spinach & Rocket Smoothie')
 sl.text('🐔 Hard-Boiled Free-Range Egg')
 sl.text('🥑🍞 Avocado Toast')
 sl.header('🍌🥭 Build your Own Fruit Smoothie 🥝🍇')
+
 
 fruit_csv = 'https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt'
 
