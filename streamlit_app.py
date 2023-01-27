@@ -1,16 +1,17 @@
-import streamlit as sl
+import streamlit as st
 import pandas as pd
+import requests as rq
 
-sl.title('My Mom\'s New Healthy Diner')
-sl.subheader('Mon-Sat 7am - 9pm')
-sl.subheader('Sun 9am - 2:30pm')
+st.title('My Mom\'s New Healthy Diner')
+st.subheader('Mon-Sat 7am - 9pm')
+st.subheader('Sun 9am - 2:30pm')
+st.header('Breakfast Favorites')
 
-sl.header('Breakfast Favorites')
-sl.text('🥣 Omega 3 & Blueberry Oatmeal')
-sl.text('🥗 Kale, Spinach & Rocket Smoothie')
-sl.text('🐔 Hard-Boiled Free-Range Egg')
-sl.text('🥑🍞 Avocado Toast')
-sl.header('🍌🥭 Build your Own Fruit Smoothie 🥝🍇')
+st.text('🥣 Omega 3 & Blueberry Oatmeal')
+st.text('🥗 Kale, Spinach & Rocket Smoothie')
+st.text('🐔 Hard-Boiled Free-Range Egg')
+st.text('🥑🍞 Avocado Toast')
+st.header('🍌🥭 Build your Own Fruit Smoothie 🥝🍇')
 
 
 fruit_csv = 'https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt'
@@ -18,8 +19,12 @@ fruit_csv = 'https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.
 my_fruit_list = pd.read_csv(fruit_csv)
 my_fruit_list = my_fruit_list.set_index('Fruit')
 
-fruits_selected = sl.multiselect('Pick some fruits:', list(my_fruit_list.index), ['Avocado', 'Strawberries'])
+fruits_selected = st.multiselect('Pick some fruits:', list(my_fruit_list.index), ['Avocado', 'Strawberries'])
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 
-sl.dataframe(fruits_to_show)
+st.dataframe(fruits_to_show)
 
+### Pull in FruityVice API response
+st.header('Fruityvice Fruit Advice')
+fruityvice_response = rq.get("https://fruityvice.com/api/fruit/watermelon")
+st.text(fruityvice_response.json())
