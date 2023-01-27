@@ -56,8 +56,6 @@ if st.button('Get Fruit Load List'):
     my_cnx.close()
     st.dataframe(my_data_rows)
 
-#st.stop()
-
 ### Fruit Name Submissions
 def insert_row_snowflake(new_fruit):
     with my_cnx.cursor() as my_cur:
@@ -69,13 +67,3 @@ if st.button('Add a Fruit to the List'):
     my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
     back_from_function = insert_row_snowflake(add_my_fruit)
     st.text(back_from_function)
-
-
-
-
-### Add second text entry box
-#my_add_fruit = st.text_input('What fruit would you like information about?')
-#st.write('Thanks for adding', my_add_fruit)
-
-
-#my_cur.execute("insert into fruit_load_list values ('from streamlit')")
