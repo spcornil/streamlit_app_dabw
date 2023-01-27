@@ -26,21 +26,6 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 
 st.dataframe(fruits_to_show)
 
-################
-### FruityVice Picker
-#st.header('Fruityvice Fruit Advice')
-#try:
-#    fruit_choice = st.text_input('What fruit would you like information about?', 'Kiwi')
-#    if not fruit_choice:
-#        st.error("Please select a fruit to get information")
-#    else:
-#        fruityvice_response = rq.get("https://fruityvice.com/api/fruit/" + fruit_choice)
-#        fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
-#        st.dataframe(fruityvice_normalized)
-#except URLError as e:
-#    st.error()
-#############
-
 def get_fruityvice_data(this_fruit_choice):
     fruityvice_response = rq.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
     fruityvice_normalized = pd.json_normalize(fruityvice_response.json())   
@@ -57,15 +42,27 @@ try:
 except URLError as e:
     st.error()
 
-st.stop()
-
 ### Connect to snowflake and add fruit load list
-my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("select * from fruit_load_list")
-my_data_rows = my_cur.fetchall()
+#my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+#my_cur = my_cnx.cursor()
+#my_cur.execute("select * from fruit_load_list")
+#my_data_rows = my_cur.fetchall()
+#st.header("The fruit load list contains:")
+#st.dataframe(my_data_rows)
+
+###
 st.header("The fruit load list contains:")
-st.dataframe(my_data_rows)
+def get_fruit_load_list():
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("select * from fruit_load_list")
+        return my_cur.fetchall()
+
+if st.button('Get Fruit Load List'):
+    my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+    my_data_rows = get_fruit_load_list()
+    st.dataframe(my_data_rows)
+
+st.stop()
 
 ### Add second text entry box
 my_add_fruit = st.text_input('What fruit would you like information about?')
