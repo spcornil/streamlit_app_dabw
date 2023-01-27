@@ -26,6 +26,7 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 
 st.dataframe(fruits_to_show)
 
+### Connect to fruityvice api for fruit info
 def get_fruityvice_data(this_fruit_choice):
     fruityvice_response = rq.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
     fruityvice_normalized = pd.json_normalize(fruityvice_response.json())   
@@ -43,14 +44,6 @@ except URLError as e:
     st.error()
 
 ### Connect to snowflake and add fruit load list
-#my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-#my_cur = my_cnx.cursor()
-#my_cur.execute("select * from fruit_load_list")
-#my_data_rows = my_cur.fetchall()
-#st.header("The fruit load list contains:")
-#st.dataframe(my_data_rows)
-
-###
 st.header("The fruit load list contains:")
 def get_fruit_load_list():
     with my_cnx.cursor() as my_cur:
@@ -62,10 +55,26 @@ if st.button('Get Fruit Load List'):
     my_data_rows = get_fruit_load_list()
     st.dataframe(my_data_rows)
 
-st.stop()
+#st.stop()
+
+### Fruit Name Submissions
+def insert_row_snowflake(new_fruit):
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("insert into fruit_load_list values ('from streamlit')")
+        return "Thanks for adding " + new_fruit
+
+add_my_fruit = st.text_input('What fruit would you like to add?')
+if st.button('Add a Fruit to the List'):
+    my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+    back_from_function = insert_row_snowflake(add_my_fruit)
+    st.text(back_from_function)
+
+
+
 
 ### Add second text entry box
-my_add_fruit = st.text_input('What fruit would you like information about?')
-st.write('Thanks for adding', my_add_fruit)
+#my_add_fruit = st.text_input('What fruit would you like information about?')
+#st.write('Thanks for adding', my_add_fruit)
 
-my_cur.execute("insert into fruit_load_list values ('from streamlit')")
+
+m#y_cur.execute("insert into fruit_load_list values ('from streamlit')")
