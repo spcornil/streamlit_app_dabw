@@ -49,6 +49,6 @@ st.dataframe(my_data_rows)
 
 ### Add second text entry box
 my_add_fruit = st.text_input('What fruit would you like information about?')
-st.write('Thanks for adding', fruit_choice)
+st.write('Thanks for adding', my_add_fruit)
 
 
