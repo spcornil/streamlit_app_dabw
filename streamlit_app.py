@@ -26,8 +26,7 @@ st.dataframe(fruits_to_show)
 
 ### Pull in FruityVice API response
 st.header('Fruityvice Fruit Advice')
-fruityvice_response = rq.get("https://fruityvice.com/api/fruit/watermelon")
-#st.text(fruityvice_response.json()) #removed in favor of the tabular output below
+fruityvice_response = rq.get("https://fruityvice.com/api/fruit/" + "kiwi")
 
 ### Normalize the FV json data
 fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
