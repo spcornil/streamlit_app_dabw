@@ -39,11 +39,16 @@ fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
 ### Output as a table
 st.dataframe(fruityvice_normalized)
 
+### Connect to snowflake and add fruit load list
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("select * from fruit_load_list")
 my_data_rows = my_cur.fetchall()
 st.header("The fruit load list contains:")
 st.dataframe(my_data_rows)
+
+### Add second text entry box
+my_add_fruit = st.text_input('What fruit would you like information about?')
+st.write('Thanks for adding', fruit_choice)
 
 
