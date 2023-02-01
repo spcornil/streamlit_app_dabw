@@ -1,4 +1,4 @@
-# Creation of streamlit app as a part of the Snowflake Developer's Workshop
+# Creation of streamlit app as a part of the Snowflake App Developer's Workshop
 
 #### App located here:
-https://spcornil-streamlit-app-dabw-streamlit-app-gwrr0k.streamlit.app/
+https://spcornil-streamlit--breakfast-appstreamlit-breakfast-app-vo6goo.streamlit.app/
