@@ -7,7 +7,7 @@ Sources catalog from Snowflake back-end, displays nutrition info based on select
 
 Snowflake tables are populated via REST API calls (developed with Rivery) to FruityVice & USDA FoodData, where JSON data was ingested/transformed/loaded into flat tables.
 
-https://rivery.io/
-https://fruityvice.com/
-https://fdc.nal.usda.gov/
+https://rivery.io/ <br/>
+https://fruityvice.com/ <br/>
+https://fdc.nal.usda.gov/ <br/>
 
